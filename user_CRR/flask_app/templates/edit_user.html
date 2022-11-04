@@ -9,30 +9,32 @@
 </head>
 <body>
     <div class="container">
+        {{user}} Checkin to see if the database came through
         <div class="mainbody">
             <div class="row">
                 <div class="col d-flex justify-content-around align-items-center">
-                    <h1>Add a New User</h1>
+                    <h1>Edit User</h1>
                     <a href="/">Home</a>
                 </div>
             </div>
-            <form action="/users/create" method="post">
+            <form action="/user/update" method="post">
+                <input type="hidden" name='id' value="{{user.id}}">
                 <div class="row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">First Name:</label>
                     <div class="col-sm-6">
-                    <input type="text" name="first_name" class="form-control" id="inputEmail3">
+                    <input type="text" name="first_name" value="{{user.first_name}}" class="form-control" id="inputEmail3">
                     </div>
                 </div>
                 <div class="row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Last Name:</label>
                     <div class="col-sm-6">
-                    <input type="text" name="last_name" class="form-control" id="inputEmail3">
+                    <input type="text" name="last_name" value="{{user.last_name}}" class="form-control" id="inputEmail3">
                     </div>
                 </div>
                 <div class="row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Email:</label>
                     <div class="col-sm-6">
-                    <input type="email" name="email" class="form-control" id="inputEmail3">
+                    <input type="email" name="email" value="{{user.email}}" class="form-control" id="inputEmail3">
                     </div>
                 </div>
                 <div class="col-12">

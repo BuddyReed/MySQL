@@ -20,15 +20,22 @@
                         <th scope="col">First</th>
                         <th scope="col">Last</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for user  in users  %}                        
                     <tr>
-                        <th scope="row">{{users.id}}</th>
+                        <!-- <th scope="row">{{users.id}}</th> -->
+                        <td>{{user.id}}</td>
                         <td>{{user.first_name}}</td>
                         <td>{{user.last_name}}</td>
                         <td>{{user.email}}</td>
+                        <td>
+                            <a href="/user/edit/{{user.id}}">edit</a>
+                            <a href="/user/delete/{{user.id}}">delete</a>
+                            <a href="/user/show/{{user.id}}">show</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
