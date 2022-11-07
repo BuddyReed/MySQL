@@ -1,5 +1,6 @@
 # You need to import the database connection from mysqlconnection.
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.ninja import Ninja #! This need to be import because we are making a ninja on this page by calling all the ninjas in the location
 
 DATABASE = "dojo_and_ninjas_schema"
 
@@ -8,6 +9,7 @@ class Dojo:
     def __init__(self, data):
         self.id = data['id']
         self.name = data['name']
+        self.ninjas = []
         # self.last_name = data['last_name']
         # self.email = data['email']
         # self.created_at = data['created_at']
@@ -40,8 +42,27 @@ class Dojo:
     def get_one(cls, data):
         query = "SELECT * FROM dojos WHERE id = %(id)s;"
         result =  connectToMySQL(DATABASE).query_db(query, data) 
-        return dojo(result[0])
+        return Dojo(result[0])
 
+    @classmethod
+    def get_one_with_ninjas(cls, data):
+        query = "SELECT * FROM dojos LEFT JOIN ninjas ON dojos.id = ninjas.dojo_id WHERE dojos.id = %(id)s;"
+        results =  connectToMySQL(DATABASE).query_db(query, data) 
+        print(results)
+        dojo = Dojo(results[0])
+        print(dojo.name)
+        for result in results:
+            temp_ninja = {
+                'id' : result['ninjas.id'],
+                'first_name' : result['first_name'],
+                'last_name' : result['last_name'],
+                'age' : result['age'],
+                'dojo_id' : result['dojo_id'],
+                'created_at' : result['created_at'],
+                'updated_at' : result['updated_at'],
+            }
+            dojo.ninjas.append(Ninja(temp_ninja))
+        return dojo
     #! Update - When you update the databases you are POSTing
     @classmethod
     def update(cls, data):

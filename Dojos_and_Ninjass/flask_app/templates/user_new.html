@@ -30,7 +30,7 @@
                 <ul class="list-group">
                     <h1>All Dojos</h1>
                     {% for dojo in dojos  %}
-                        <a href="">{{dojo.name}}</a>
+                        <a href='/dojos/show/{{dojo.id}}'>{{dojo.name}}</a>
                     {% endfor %}
                 </ul>
                 <a href="/ninjas">Add Ninja</a>

@@ -1,6 +1,7 @@
 from flask_app import app, render_template, request, redirect
 #This is importing your cless(models) User into the file to access
-from flask_app.models.user import Dojo
+from flask_app.models.dojo import Dojo
+
 
 #Read All route pulling all Dojo locations.
 @app.route('/')
@@ -14,16 +15,13 @@ def new_user():
     Dojo.save(request.form)
     return redirect('/')
 
-#This route is fot the New Ninjas page. It is used to render page and create new Ninjas to a Dojo
-@app.route('/ninjas')
-def index():
-    return render_template('index.html', dojos = Dojo.get_all())
+
+@app.route('/dojos/show/<int:id>')
+def dojos(id):
+    data = {"id" : id}
+    return render_template('show.html', dojo = Dojo.get_one_with_ninjas(data))
 
 
-
-@app.route('/dojos')
-def dojos():
-    return render_template('show_user.html')
 
 
 
