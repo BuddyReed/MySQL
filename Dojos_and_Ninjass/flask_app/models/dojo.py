@@ -63,6 +63,7 @@ class Dojo:
             }
             dojo.ninjas.append(Ninja(temp_ninja))
         return dojo
+    
     #! Update - When you update the databases you are POSTing
     @classmethod
     def update(cls, data):

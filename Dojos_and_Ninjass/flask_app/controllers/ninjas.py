@@ -14,5 +14,5 @@ def index():
 def new_ninja():
     print(request.form)
     Ninja.save(request.form)
-    return redirect('/')
+    return redirect(f"/dojos/show/{request.form['dojo_id']}") #! STUDY STUDY - 
 
