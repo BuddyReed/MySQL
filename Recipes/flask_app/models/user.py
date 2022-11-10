@@ -14,6 +14,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
+        self.recipes = []
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -50,4 +51,7 @@ class User:
         if not EMAIL_REGEX.match(user['email']): 
             flash("Invalid email address!")
             is_valid = False
+        if len(user['password']) < 8:
+            flash("Password must be at least 8 character long.")
+            is_valid = False            
         return is_valid

@@ -13,6 +13,12 @@ def register():
     # TODO VALIDATE OUR USER
     if not User.validate_user(request.form):
         return redirect('/')
+    # TODO check to see if the email supplied is already in our DB
+    data = {'email': request.form['email']}
+    check_for_user = User.get_by_email(data)
+    if check_for_user:
+        flash("email already registered")
+        return redirect('/')
     # TODO HASH THE PASSWORD
     hashed_pw = bcrypt.generate_password_hash(request.form['password'])
     # TODO SAVE USER TO THE DATABASE
@@ -49,7 +55,7 @@ def login():
     # TODO log in user
     session['user_id'] = user.id
     session['first_name'] = user.first_name
-    return redirect('/things')
+    return redirect('/recipes')
 
 #____________________________________________
 
